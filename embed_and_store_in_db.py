@@ -7,7 +7,7 @@ from tqdm import tqdm
 # Constants for embedding model and database naming
 EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5" #takes 512 tokens at once for embedding
 DB_PATH = "./peeky_database" # Name of chromadb database path
-BASE_COLLECTION_DATABASE_NAME = "PERSONAL-PEEKY-DATABASE-" # Base name for the collection in chromadb
+BASE_COLLECTION_DATABASE_NAME = "PEEKY-DATABASE-" # Base name for the collection in chromadb
 ITERATION_FILE_NAME = "dbnameiteration.txt"
 
 class EmbedChunksAndStoreInChromaDB:
