@@ -29,7 +29,7 @@ Thumbs.db
 
 # PDF uploads and user data
 pdf_files/
-!pdf_files/.gitkeep  # <- If you want the folder but not the files
+!pdf_files/.gitkeep
 
 # Vector DBs and local databases
 peeky_database/
@@ -57,7 +57,3 @@ chroma_db/
 dist/
 build/
 *.egg-info/
-
-test.py
-
-snehit.la
