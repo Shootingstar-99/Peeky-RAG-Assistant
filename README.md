@@ -77,7 +77,7 @@ OPENROUTER_API_KEY=your-openrouter-api-key-here
 ## 🏃‍♂️ Usage
 **To run the application**
 ```bash
-streamlit run main.py
+streamlit run app.py
 ```
 - Upload PDFs via the sidebar.
 - Click "Configure" to process, embed, and index all files for Q&A.
