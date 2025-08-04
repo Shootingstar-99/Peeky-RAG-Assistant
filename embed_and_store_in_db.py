@@ -19,7 +19,7 @@ class EmbedChunksAndStoreInChromaDB:
     def __init__(self, chunks: List[Document], embedding_model= EMBEDDING_MODEL):
         # Initialize embedding model on GPU with normalization
         self.embedding_model = HuggingFaceEmbeddings(model_name = embedding_model,
-                                                     model_kwargs={'device': "cuda"},
+                                                     # model_kwargs={'device': "cuda"},
                                                      encode_kwargs= {'normalize_embeddings': True})
         self.chunks = chunks # List of Document objects to process
         self.texts = [doc.page_content for doc in chunks] # Extract page contents for embedding

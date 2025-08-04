@@ -48,7 +48,7 @@ class BuildRagChain:
         """
         embeddings = HuggingFaceEmbeddings(
             model_name=self.embedding_model_name,
-            model_kwargs={"device": "cuda"}, # Use GPU for speed [I used Nvidia RTX 4060 cuda 12.6]
+            #model_kwargs={"device": "cuda"}, # Use GPU for speed [I used Nvidia RTX 4060 cuda 12.6]
             encode_kwargs={"normalize_embeddings": True},
         )
 
