@@ -1,0 +1,63 @@
+# created by virtualenv automatically
+.venv/etc
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# Streamlit cache and artifacts
+.cache/
+*.streamlit-*
+
+# Jupyter/IPython
+*.ipynb_checkpoints
+
+# OS/filesystem junk
+.DS_Store
+Thumbs.db
+
+# Editor/project settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# PDF uploads and user data
+pdf_files/
+!pdf_files/.gitkeep  # <- If you want the folder but not the files
+
+# Vector DBs and local databases
+peeky_database/
+chroma_db/
+*.db
+*.sqlite3
+*.log
+
+# Env/config/secrets
+.env
+.env.*
+*.env
+
+# Miscellaneous
+*.bak
+*.tmp
+*.swp
+*.old
+
+# Test/output files
+*.test
+*.out
+
+# Common build artifacts
+dist/
+build/
+*.egg-info/
+
+test.py
+
+snehit.la
