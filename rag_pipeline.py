@@ -44,24 +44,24 @@ class BuildRagChain:
         self.llm_model = llm_model
 
     @st.cache_resource
-    def load_vectorstore(self):
+    def load_vectorstore(_self):
         """
         Load a Chroma vectorstore using the designated embedding model and path.
         """
         embeddings = HuggingFaceEmbeddings(
-            model_name=self.embedding_model_name,
+            model_name=_self.embedding_model_name,
             #model_kwargs={"device": "cuda"}, # Use GPU for speed [I used Nvidia RTX 4060 cuda 12.6]
             encode_kwargs={"normalize_embeddings": True},
         )
 
         return Chroma(
-            collection_name= self.collection_name,
+            collection_name= _self.collection_name,
             embedding_function=embeddings,
-            persist_directory= self.database_path,
+            persist_directory= _self.database_path,
         )
 
     @st.cache_resource
-    def build_rag_chain(self):
+    def build_rag_chain(_self):
         """
         Assembles the entire RAG workflow:
          - Loads vectors
@@ -73,13 +73,13 @@ class BuildRagChain:
             RetrievalQA: LangChain retrieval-augmented generation chain.
         """
         print("Setting up LLM with RAG pipeline...")
-        vectorstore = self.load_vectorstore()
+        vectorstore = _self.load_vectorstore()
 
         # Use custom retriever to filter weak matches
         retriever = ThresholdRetriever(vectorstore=vectorstore, threshold=0.42)
         # Set up LLM, using model and credentials from .env
         llm = ChatOpenAI(
-            model= self.llm_model,
+            model= _self.llm_model,
             temperature=0.7, # Controls response randomness
             base_url="https://openrouter.ai/api/v1",
             api_key=st.secrets["OPENROUTER_API_KEY"],

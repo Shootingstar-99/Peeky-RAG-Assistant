@@ -37,13 +37,13 @@ class EmbedChunksAndStoreInChromaDB:
         self.collection = self.chroma_client.get_or_create_collection(self.database_name)
 
     @st.cache_resource
-    def create_embeddings(self):
+    def create_embeddings(_self):
         """
         Generate embeddings for all chunks using the initialized model.
         Stores result in self.embeddings.
         """
-        print(f"Creating embeddings for {len(self.texts)} documents...")
-        self.embeddings = self.embedding_model.embed_documents(self.texts)
+        print(f"Creating embeddings for {len(_self.texts)} documents...")
+        _self.embeddings = _self.embedding_model.embed_documents(_self.texts)
         print("Embeddings created successfully")
 
     def get_database_name(self):
@@ -64,21 +64,21 @@ class EmbedChunksAndStoreInChromaDB:
         self.database_name = base + self.datetimeformatted
 
     @st.cache_resource
-    def save_in_chromadb(self):
+    def save_in_chromadb(_self):
         """
         Saves all embedded chunks into ChromaDB in batches.
 
         Each batch is assigned unique IDs and added to the persistent vector store
         under the initialized collection.
         """
-        for i in tqdm(range(0, len(self.texts), self.batch_size), desc= "Saving in database: "):
-            batch_texts = self.texts[i : i + self.batch_size]
-            batch_embeddings = self.embeddings[i : i + self.batch_size]
-            batch_chunks = self.chunks[i : i + self.batch_size]
+        for i in tqdm(range(0, len(_self.texts), _self.batch_size), desc= "Saving in database: "):
+            batch_texts = _self.texts[i : i + _self.batch_size]
+            batch_embeddings = _self.embeddings[i : i + _self.batch_size]
+            batch_chunks = _self.chunks[i : i + _self.batch_size]
             batch_ids = [f"doc_{j}" for j in range(i, i + len(batch_texts))]
 
             # Add text, embeddings, and IDs to the Chroma collection
-            self.collection.add(
+            _self.collection.add(
                 documents=batch_texts,
                 embeddings=batch_embeddings,
                 ids=batch_ids
