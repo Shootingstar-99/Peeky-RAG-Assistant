@@ -3,12 +3,13 @@ from typing import List
 from langchain.schema import Document
 import chromadb
 from tqdm import tqdm
+from datetime import datetime
 
 # Constants for embedding model and database naming
 EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5" #takes 512 tokens at once for embedding
 DB_PATH = "./peeky_database" # Name of chromadb database path
 BASE_COLLECTION_DATABASE_NAME = "PEEKY-DATABASE-" # Base name for the collection in chromadb
-ITERATION_FILE_NAME = "dbnameiteration.txt"
+# ITERATION_FILE_NAME = "dbnameiteration.txt"
 
 class EmbedChunksAndStoreInChromaDB:
     """
@@ -26,6 +27,8 @@ class EmbedChunksAndStoreInChromaDB:
         self.embeddings = None # Placeholder for computed embeddings
         self.create_embeddings()
         self.database_name = ""
+        now = datetime.now()
+        self.datetimeformatted = now.strftime("%H%M%S%d%m%y")
         self.get_database_name()
         self.batch_size = 5000 # ChromaDB has an upper limit of 5641 entries at one time, so we create batches
         self.db_path = DB_PATH
@@ -51,13 +54,12 @@ class EmbedChunksAndStoreInChromaDB:
         don't interfere with the current iteration of the chatbot.
         """
         base = BASE_COLLECTION_DATABASE_NAME
-        with open(ITERATION_FILE_NAME, "r") as file:
-            iteration = int(file.read())
-
-        with open(ITERATION_FILE_NAME, "w") as file:
-            file.write(str(iteration + 1))
-
-        self.database_name = base + str(iteration)
+        # with open(ITERATION_FILE_NAME, "r") as file:
+        #     iteration = int(file.read())
+        #
+        # with open(ITERATION_FILE_NAME, "w") as file:
+        #     file.write(str(iteration + 1))
+        self.database_name = base + self.datetimeformatted
 
     def save_in_chromadb(self):
         """

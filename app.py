@@ -118,9 +118,7 @@ def process_documents_pipeline(progress_placeholder, log_placeholder):
         update_status("Setting up LLM", "Initializing RAG system...")
         progress_placeholder.progress(95)
         try:
-            with open("dbnameiteration.txt", "r") as file:
-                latest_iteration = int(file.read()) - 1
-            collection_name = f"PEEKY-DATABASE-{latest_iteration}"
+            collection_name = embedder.database_name
 
             st.session_state.rag_chain = BuildRagChain(
                 collection_name= collection_name,

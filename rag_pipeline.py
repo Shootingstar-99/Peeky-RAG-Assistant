@@ -8,6 +8,7 @@ from langchain_chroma import Chroma
 from langchain_openai import ChatOpenAI
 from langchain.chains import RetrievalQA
 from prompt import CUSTOM_PROMPT
+import streamlit as st
 
 LLM_MODEL = "meta-llama/llama-3.3-70b-instruct:free" # Default LLM used with OpenRouter
 
@@ -79,7 +80,7 @@ class BuildRagChain:
             model= self.llm_model,
             temperature=0.7, # Controls response randomness
             base_url="https://openrouter.ai/api/v1",
-            api_key=os.getenv("OPENROUTER_API_KEY"),
+            api_key=st.secrets["OPENROUTER_API_KEY"],
         )
 
         rag_chain = RetrievalQA.from_chain_type(
