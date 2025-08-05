@@ -4,6 +4,7 @@ from langchain.schema import Document
 import chromadb
 from tqdm import tqdm
 from datetime import datetime
+import streamlit as st
 
 # Constants for embedding model and database naming
 EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5" #takes 512 tokens at once for embedding
@@ -35,6 +36,7 @@ class EmbedChunksAndStoreInChromaDB:
         self.chroma_client = chromadb.PersistentClient(path= DB_PATH)
         self.collection = self.chroma_client.get_or_create_collection(self.database_name)
 
+    @st.cache_resource
     def create_embeddings(self):
         """
         Generate embeddings for all chunks using the initialized model.
@@ -61,6 +63,7 @@ class EmbedChunksAndStoreInChromaDB:
         #     file.write(str(iteration + 1))
         self.database_name = base + self.datetimeformatted
 
+    @st.cache_resource
     def save_in_chromadb(self):
         """
         Saves all embedded chunks into ChromaDB in batches.

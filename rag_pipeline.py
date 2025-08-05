@@ -43,6 +43,7 @@ class BuildRagChain:
         self.embedding_model_name = embedding_model_name
         self.llm_model = llm_model
 
+    @st.cache_resource
     def load_vectorstore(self):
         """
         Load a Chroma vectorstore using the designated embedding model and path.
@@ -59,6 +60,7 @@ class BuildRagChain:
             persist_directory= self.database_path,
         )
 
+    @st.cache_resource
     def build_rag_chain(self):
         """
         Assembles the entire RAG workflow:

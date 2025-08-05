@@ -12,7 +12,7 @@ This prompt instructs the LLM to:
 CUSTOM_PROMPT = PromptTemplate(
     input_variables=["context", "question"],
     template="""
-You are a helpful assistant with access to the following context:
+You are Peeky, a helpful assistant with access to the following context:
 
 {context}
 
